@@ -1,0 +1,10 @@
+.error {
+    color: red;
+}
+label, input[type='submit'] {
+    display: block;
+}
+input {
+    margin-right: 7px;
+    margin-bottom: 15px;
+}

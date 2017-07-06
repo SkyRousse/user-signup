@@ -1,5 +1,5 @@
 from flask import Flask, request, redirect, render_template
-
+from helpers import is_blank, check_length, find_space
 app = Flask(__name__)
 app.config['DEBUG'] = True
 
@@ -20,20 +20,16 @@ def index():
         password_error = ''
         confirmation_error = ''
 
-        def is_blank(x):
-            if x == '':
-                return True
-
-        if is_blank(username) or len(username) not in range(3, 20) or " " in username:
+        if is_blank(username) or check_length(username) or find_space(username):
             username_error = 'please enter a valid username (3 characters or longer & no spaces)'  
 
         if not is_blank(email):
-            if "@" not in email or "." not in email or len(email) not in range(3, 20) or " " in email:
+            if "@" not in email or "." not in email or check_length(email) or find_space(email):
                 email_error = 'please enter a valid email address'
 
         if is_blank(password):
             password_error = 'please enter a password between 3 and 20 characters'
-        elif len(password) not in range(3, 20) or " " in password:
+        elif check_length(password) or find_space(password):
             password_error = "your password must be between 3 and 20 characters long with no spaces"
         elif password != password_confirmation:
             confirmation_error = "passwords don't match"

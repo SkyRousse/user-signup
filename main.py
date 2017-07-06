@@ -24,16 +24,17 @@ def index():
             if x == '':
                 return True
 
-        if is_blank(username):
-            username_error = 'please enter a username'  
+        if is_blank(username) or len(username) not in range(3, 20) or " " in username:
+            username_error = 'please enter a valid username (3 characters or longer & no spaces)'  
 
-        if is_blank(email):
-            email_error = 'please enter an email address'
+        if not is_blank(email):
+            if "@" not in email or "." not in email or len(email) not in range(3, 20) or " " in email:
+                email_error = 'please enter a valid email address'
 
         if is_blank(password):
             password_error = 'please enter a password between 3 and 20 characters'
-        elif len(password) not in range(3, 20):
-            password_error = "your password must be between 3 and 20 characters long"
+        elif len(password) not in range(3, 20) or " " in password:
+            password_error = "your password must be between 3 and 20 characters long with no spaces"
         elif password != password_confirmation:
             confirmation_error = "passwords don't match"
 
